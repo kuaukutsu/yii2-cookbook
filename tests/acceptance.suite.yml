@@ -1,0 +1,21 @@
+class_name: AcceptanceTester
+modules:
+    enabled:
+        - Asserts
+        - PhpBrowser:
+            url: http://api.aizel.local
+            browser: firefox
+        - Yii2:
+            part: [init]
+            entryScript: index-test.php
+            cleanup: true
+        - REST:
+            #url:
+            depends: [PhpBrowser, Yii2, Asserts]
+            part: Json
+        - \tests\_support\ApiHelper:
+            url:
+            strict: false
+            reload: false
+            snapshot: false
+            version: 18
